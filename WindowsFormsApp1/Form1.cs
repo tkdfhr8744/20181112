@@ -17,19 +17,23 @@ namespace WindowsFormsApp1
             InitializeComponent();
             Load += Form1_Load1;
         }
+        private Button button1;
 
         private void Form1_Load1(object sender, EventArgs e)
-        { 
-            Button button1 = new Button();
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                button1 = new Button();
 
-            button1.DialogResult = DialogResult.OK;
-            button1.Text = "확인";
-            button1.Size = new Size(100, 50);
-            button1.Location = new Point(30, 30);
+                button1.DialogResult = DialogResult.OK;
+                button1.Text = string.Format("확인:{0}",i+1);
+                button1.Size = new Size(100, 50);
+                button1.Location = new Point((100*i)+30, 30);
+                button1.Cursor = Cursors.Hand;
 
-            Controls.Add(button1);
-            button1.Click += button1_click;
-
+                Controls.Add(button1);
+                button1.Click += button1_click;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -37,9 +41,10 @@ namespace WindowsFormsApp1
             
         }
 
-        private void button1_click(object o, EventArgs a)
+        private void button1_click(object o, EventArgs a)// object 버튼에 대한 정보를 받아올 수 있다.
         {
-            MessageBox.Show("클릭 확인!");
+            button1 = (Button)o;
+            button1.BackColor=(button1.BackColor == Color.Green)? button1.BackColor = Color.Silver : button1.BackColor = Color.Green;
         }
         
     }
